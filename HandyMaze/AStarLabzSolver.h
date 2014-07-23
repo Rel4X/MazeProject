@@ -2,7 +2,7 @@
 
 #include		<map>
 #include		<utility>
-#include		"Labyrinthuz.h"
+#include		"HandyMaze.h"
 
 #define			STARTING_BLOC	10
 #define			ARRIVAL			20

@@ -1,4 +1,4 @@
-#include "Labyrinthuz.h"
+#include "HandyMaze.h"
 
 std::string		HandyMaze::p_error = "";
 
@@ -26,7 +26,7 @@ bool			HandyMaze::Generate()
 		std::cout << "Starting allocations..." << std::endl;
 		this->p_pool = new (std::nothrow)std::vector<Index>(this->p_pool_idx);				// Allocation of the value pool.
 		if (!this->p_pool) { HandyMaze::p_error = "Memory failed while allocating pool."; return (false); }
-		this->p_groups = new std::vector<std::list<int>>(this->p_pool_idx);					// ALlocation of the id path lists.
+		this->p_groups = new (std::nothrow)std::vector<std::list<int>>(this->p_pool_idx);	// ALlocation of the id path lists.
 		if (!this->p_map) { HandyMaze::p_error = "Memory failed while allocating groups."; return (false); }
 		for (int i = 0; i < this->p_pool_idx; ++i)
 		{

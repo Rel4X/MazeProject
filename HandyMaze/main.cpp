@@ -2,7 +2,7 @@
 #include		"SFML\Window.hpp"
 #include		"SFML\Graphics.hpp"
 #include		"SFML\System.hpp"
-#include		"Labyrinthuz.h"
+#include		"HandyMaze.h"
 #include		"AStarLabzSolver.h"
 
 #define			WIN_WIDTH	600
