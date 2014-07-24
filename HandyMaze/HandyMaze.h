@@ -10,6 +10,7 @@
 #include	<vector>
 #include	<list>
 #include	"RandomMachine.h"
+#include	"RxTime.h"
 
 #define		OPEN	1
 #define		CLOSED	2	
@@ -23,7 +24,7 @@ struct			Labz
 
 public:
 	Labz() : lab(0) { }
-};
+};	
 
 class				HandyMaze
 {

@@ -20,7 +20,7 @@ int				main()
 	sf::Image			imgCloseL;
 	sf::Image			imgPath;
 	sf::Image			final;
-	HandyMaze			labz(1000, 1000);
+	HandyMaze			labz(2000, 2000);
 	AStarLabzSolver		solver;
 	int					imgW;
 	int					imgH;

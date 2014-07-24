@@ -14,8 +14,12 @@ HandyMaze::~HandyMaze(void)
 
 bool			HandyMaze::Generate()
 {
+	RxTime		timer;
+
+	timer.Start("Init");
 	if (this->Initialize() == true)
 	{
+		std::cout << "Init done in: " << timer.GetEllapsedTime("Init") << " seconds." << std::endl;
 		unsigned int		maxcombmax;			// Maximum openable walls.
 		unsigned int		maxcomb;			// Maximum openable walls, moving value.
 
@@ -24,15 +28,21 @@ bool			HandyMaze::Generate()
 		this->p_pool_idx = this->p_maxshebs;	// At first the index is up to the end.
 
 		std::cout << "Starting allocations..." << std::endl;
+		timer.Start("Allocation-Pool");
 		this->p_pool = new (std::nothrow)std::vector<Index>(this->p_pool_idx);				// Allocation of the value pool.
+		std::cout << "Allocation-Pool done in: " << timer.GetEllapsedTime("Allocation-Pool") << " seconds." << std::endl;
 		if (!this->p_pool) { HandyMaze::p_error = "Memory failed while allocating pool."; return (false); }
+		timer.Start("Allocation-Groups");
 		this->p_groups = new (std::nothrow)std::vector<std::list<int>>(this->p_pool_idx);	// ALlocation of the id path lists.
+		std::cout << "Allocation-Groups done in: " << timer.GetEllapsedTime("Allocation-Groups") << " seconds." << std::endl;
 		if (!this->p_map) { HandyMaze::p_error = "Memory failed while allocating groups."; return (false); }
+		timer.Start("Pushing");
 		for (int i = 0; i < this->p_pool_idx; ++i)
 		{
 			(*this->p_pool)[i].value = i;				// Filling the values.
 			(*this->p_groups)[i].push_back(i);			// At the begining, each square is alone in its path.
 		}
+		std::cout << "Pushing done in: " << timer.GetEllapsedTime("Pushing") << " seconds." << std::endl;
 
 		std::cout << "Starting generation..." << std::endl;
 		--this->p_pool_idx;								// We decrease this->p_pool_idx because max index is this->p_pool_idx - 1;
@@ -41,6 +51,7 @@ bool			HandyMaze::Generate()
 		int					rand_sheb;
 		int					rand_wall;
 
+		timer.Start("Generation");
 		while (maxcomb > 0)												// While we have not opened maxcomb walls.
 		{
 			rand_sheb = RandomMachine::Randomize(0, this->p_pool_idx);	// Seek a value for a Shebang to open.
@@ -77,6 +88,14 @@ bool			HandyMaze::Generate()
 				--this->p_pool_idx;															//
 			}
 		}
+		std::cout << "Generation done in: " << timer.GetEllapsedTime("Generation") << " seconds." << std::endl;
+		std::cout << "Freeing ..." << std::endl;
+		timer.Start("Pool-Liberation");
+		delete (this->p_pool);
+		std::cout << "Pool-Liberation done in: " << timer.GetEllapsedTime("Pool-Liberation") << " seconds." << std::endl;
+		timer.Start("Groups-Liberation");
+		delete (this->p_groups);
+		std::cout << "Groups-Liberation done in: " << timer.GetEllapsedTime("Groups-Liberation") << " seconds." << std::endl;
 		return (true);
 	}
 	return (false);
