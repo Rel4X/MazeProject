@@ -26,6 +26,15 @@ public:
 	Labz() : lab(0) { }
 };	
 
+struct				GNode
+{
+	GNode*			head;
+	GNode*			tail;
+	GNode*			next;
+	int				value;
+	int				size;
+};
+
 class				HandyMaze
 {
 private:
@@ -58,9 +67,7 @@ private:
 	std::vector<Index>*				p_pool;			// Will contain values for random picking.
 	unsigned int					p_pool_idx;		// Index in pool where is the last usable value.
 
-	std::vector<std::list<int>>*	p_groups;		// Vectors of differents group of id. On id per path at the begining.
-	std::list<int>::iterator		gis;			// Its iterators.
-	std::list<int>::iterator		gie;			//
+	GNode*							p_groups;		// Vectors of differents group of id. On id per path at the begining.
 
 	char**							p_formated_lab;	// Formated lab using #define values up there.
 

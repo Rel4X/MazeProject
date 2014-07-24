@@ -33,14 +33,18 @@ bool			HandyMaze::Generate()
 		std::cout << "Allocation-Pool done in: " << timer.GetEllapsedTime("Allocation-Pool") << " seconds." << std::endl;
 		if (!this->p_pool) { HandyMaze::p_error = "Memory failed while allocating pool."; return (false); }
 		timer.Start("Allocation-Groups");
-		this->p_groups = new (std::nothrow)std::vector<std::list<int>>(this->p_pool_idx);	// ALlocation of the id path lists.
+		this->p_groups = new (std::nothrow)GNode[this->p_maxshebs]();		// ALlocation of the id path lists.
 		std::cout << "Allocation-Groups done in: " << timer.GetEllapsedTime("Allocation-Groups") << " seconds." << std::endl;
-		if (!this->p_map) { HandyMaze::p_error = "Memory failed while allocating groups."; return (false); }
+		if (!this->p_groups) { HandyMaze::p_error = "Memory failed while allocating groups."; return (false); }
 		timer.Start("Pushing");
 		for (int i = 0; i < this->p_pool_idx; ++i)
 		{
 			(*this->p_pool)[i].value = i;				// Filling the values.
-			(*this->p_groups)[i].push_back(i);			// At the begining, each square is alone in its path.
+			this->p_groups[i].value = i;				// At the begining, each square is alone in its path.
+			this->p_groups[i].head = &(this->p_groups[i]);
+			this->p_groups[i].tail = &(this->p_groups[i]);
+			this->p_groups[i].next = 0;
+			this->p_groups[i].size = 1;
 		}
 		std::cout << "Pushing done in: " << timer.GetEllapsedTime("Pushing") << " seconds." << std::endl;
 
@@ -145,21 +149,31 @@ bool			HandyMaze::TryToOpen(int sheb, int wall)
 
 void			HandyMaze::PathFuuuuuuusion(int oidx, int nidx)
 {
-	if ((*this->p_groups)[oidx].size() > (*this->p_groups)[nidx].size())
+	GNode*		tmp;
+
+	if (this->p_groups[oidx].size > this->p_groups[nidx].size)
 	{
-		this->gis = (*this->p_groups)[nidx].begin();
-		this->gie = (*this->p_groups)[nidx].end();
-		for (; this->gis != this->gie; ++(this->gis))
-			this->p_map[(*this->gis)].id = oidx;
-		(*this->p_groups)[oidx].splice((*this->p_groups)[oidx].begin(), (*this->p_groups)[nidx]);
+		this->p_groups[oidx].size += this->p_groups[nidx].size;
+		tmp = &(this->p_groups[nidx]);
+		while (tmp != 0)
+		{
+			this->p_map[tmp->value].id = oidx;
+			tmp = tmp->next;
+		}
+		this->p_groups[oidx].tail->next = this->p_groups[nidx].head;
+		this->p_groups[oidx].tail = this->p_groups[nidx].tail;
 	}
 	else
 	{
-		this->gis = (*this->p_groups)[oidx].begin();
-		this->gie = (*this->p_groups)[oidx].end();
-		for (; this->gis != this->gie; ++(this->gis))
-			this->p_map[(*this->gis)].id = nidx;
-		(*this->p_groups)[nidx].splice((*this->p_groups)[nidx].begin(), (*this->p_groups)[oidx]);
+		this->p_groups[nidx].size += this->p_groups[oidx].size;
+		tmp = &(this->p_groups[oidx]);
+		while (tmp != 0)
+		{
+			this->p_map[tmp->value].id = nidx;
+			tmp = tmp->next;
+		}
+		this->p_groups[nidx].tail->next = this->p_groups[oidx].head;
+		this->p_groups[nidx].tail = this->p_groups[oidx].tail;
 	}
 }
 

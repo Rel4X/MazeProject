@@ -20,7 +20,7 @@ int				main()
 	sf::Image			imgCloseL;
 	sf::Image			imgPath;
 	sf::Image			final;
-	HandyMaze			labz(2000, 2000);
+	HandyMaze			labz(5000, 5000);
 	AStarLabzSolver		solver;
 	int					imgW;
 	int					imgH;
@@ -39,7 +39,7 @@ int				main()
 		return (1);
 	}
 	std::cout << "Generated" << std::endl;
-	solver.Solve(l);
+	//solver.Solve(l);
 	imgW = 1;//WIN_WIDTH / l->w;
 	imgH = 1;//WIN_HEIGHT / l->h;
 	image.create(imgW, imgH);
@@ -76,7 +76,7 @@ int				main()
 		}
 	std::cout << "Saving Image ..." << std::endl;
 	final.saveToFile("CLEAR.jpg");
-	for (int i = 0; i < l->h; ++i)
+	/*for (int i = 0; i < l->h; ++i)
 		for (int j = 0; j < l->w; ++j)
 		{
 			if (l->lab[j][i] == WALL)
@@ -93,7 +93,7 @@ int				main()
 				final.copy(imgPath, j * imgW, i * imgW);
 
 		}
-	final.saveToFile("DONE.jpg");
+	final.saveToFile("DONE.jpg");*/
 	system("PAUSE");
 	return (0);
 }
