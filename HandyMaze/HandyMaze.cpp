@@ -41,7 +41,6 @@ bool			HandyMaze::Generate()
 		{
 			(*this->p_pool)[i].value = i;				// Filling the values.
 			this->p_groups[i].value = i;				// At the begining, each square is alone in its path.
-			this->p_groups[i].head = &(this->p_groups[i]);
 			this->p_groups[i].tail = &(this->p_groups[i]);
 			this->p_groups[i].next = 0;
 			this->p_groups[i].size = 1;
@@ -160,7 +159,7 @@ void			HandyMaze::PathFuuuuuuusion(int oidx, int nidx)
 			this->p_map[tmp->value].id = oidx;
 			tmp = tmp->next;
 		}
-		this->p_groups[oidx].tail->next = this->p_groups[nidx].head;
+		this->p_groups[oidx].tail->next = &(this->p_groups[nidx]);
 		this->p_groups[oidx].tail = this->p_groups[nidx].tail;
 	}
 	else
@@ -172,7 +171,7 @@ void			HandyMaze::PathFuuuuuuusion(int oidx, int nidx)
 			this->p_map[tmp->value].id = nidx;
 			tmp = tmp->next;
 		}
-		this->p_groups[nidx].tail->next = this->p_groups[oidx].head;
+		this->p_groups[nidx].tail->next = &(this->p_groups[oidx]);
 		this->p_groups[nidx].tail = this->p_groups[oidx].tail;
 	}
 }

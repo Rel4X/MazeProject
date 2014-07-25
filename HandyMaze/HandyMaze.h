@@ -28,7 +28,6 @@ public:
 
 struct				GNode
 {
-	GNode*			head;
 	GNode*			tail;
 	GNode*			next;
 	int				value;

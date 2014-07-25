@@ -1,7 +1,7 @@
 #include		<iostream>
-#include		"SFML\Window.hpp"
-#include		"SFML\Graphics.hpp"
-#include		"SFML\System.hpp"
+#include		<SFML/Window.hpp>
+#include		<SFML/Graphics.hpp>
+#include		<SFML/System.hpp>
 #include		"HandyMaze.h"
 #include		"AStarLabzSolver.h"
 
@@ -20,7 +20,7 @@ int				main()
 	sf::Image			imgCloseL;
 	sf::Image			imgPath;
 	sf::Image			final;
-	HandyMaze			labz(5000, 5000);
+	HandyMaze			labz(15000, 15000);
 	AStarLabzSolver		solver;
 	int					imgW;
 	int					imgH;
