@@ -1,4 +1,6 @@
 #include		<iostream>
+#include		<string>
+#include		<sstream>
 #include		<stdint.h>
 #include		<inttypes.h>
 #include		"HandyMaze.h"
@@ -8,10 +10,11 @@
 #define			WIN_WIDTH	600
 #define			WIN_HEIGHT	600
 #define			WIN_NAME	"HandyMaze"
+#define			MAZE_SIDE	18500
 
 int				main()
 {
-  HandyMaze			labz(1000, 1000);
+  HandyMaze			labz(MAZE_SIDE, MAZE_SIDE);
   AStarLabzSolver		solver;
   Labz*				l;
   BMP				img;
@@ -54,6 +57,8 @@ int				main()
 	  }
       }
   std::cout << "Saving Image ..." << std::endl;
-  img.WriteToFile("LabyZ.bmp");
+  std::stringstream	ss;
+  ss << "Laby-" << MAZE_SIDE << ".bmp";
+  img.WriteToFile(ss.str().c_str());
   return (0);
 }
