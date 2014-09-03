@@ -1,7 +1,9 @@
 #include		<iostream>
+#include		<stdint.h>
+#include		<inttypes.h>
 #include		"HandyMaze.h"
-#include		"RxImage.h"
 #include		"AStarLabzSolver.h"
+#include		"EasyBMP.h"
 
 #define			WIN_WIDTH	600
 #define			WIN_HEIGHT	600
@@ -9,10 +11,10 @@
 
 int				main()
 {
-  HandyMaze			labz(100, 100);
+  HandyMaze			labz(1000, 1000);
   AStarLabzSolver		solver;
   Labz*				l;
-  RxImage			img;
+  BMP				img;
   
   if (labz.Generate() == false)
     {
@@ -27,19 +29,31 @@ int				main()
     }
   std::cout << "Generated" << std::endl;
   std::cout << "Allocating Image ..." << std::endl;
-  img.Create(l->w, l->h);
+  if (img.SetBitDepth(1) == false)
+    std::cout << "Failed to change Depth" << std::endl;
+  img.SetSize(l->w, l->h);
   std::cout << "Filling Image ..." << std::endl;
   std::cout << l->w << " " << l->h << std::endl;
   for (int i = 0; i < l->w; ++i)
     for (int j = 0; j < l->h; ++j)
-      img.SetPixel(j, i, 255, 255, 255);
+      {
+	img(j, i)->Red = 255;
+	img(j, i)->Green = 255;
+	img(j, i)->Blue = 255;
+	img(j, i)->Alpha = 0;
+      }
   for (uint64_t i = 0; i < l->h; ++i)
     for (uint64_t j = 0; j < l->w; ++j)
       {
 	if (l->lab[j][i] == WALL)
-	  img.SetPixel(j, i, 0, 0, 0);
+	  {
+	    img(j, i)->Red = 0;
+	    img(j, i)->Green = 0;
+	    img(j, i)->Blue = 0;
+	    img(j, i)->Alpha = 0;
+	  }
       }
   std::cout << "Saving Image ..." << std::endl;
-  img.SaveToJpeg("CLEAR.jpg");
+  img.WriteToFile("LabyZ.bmp");
   return (0);
 }
