@@ -5,15 +5,9 @@ HandyMaze is a maze generator with its solver and its drawer. It can generate hu
 
 I have used the "EasyBMP" library by Paul Macklin for the drawing part.
 
-Only available on linux for now.
+Only available on Windows for now.
 
-Compile line is :
+Launching line :
+./HandyMaze SIZE_OF_LAB [-ia]
 
-g++ -o maze -I./EasyBMP *.cpp EasyBMP/EasyBMP.cpp
-
-The size of the maze is to put in the main.cpp.
-
-
-
-
-IMPORTANT NOTE : Output in image is broken atm. The algorithm work but cannot create images bigger thant 12k*12k due to BMP format problems.
+-ia : Activate de AI solving of the maze plus the drawing of a picture of the maze with the path
