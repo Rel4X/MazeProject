@@ -9,47 +9,35 @@
 #include	<string.h>
 #include	<vector>
 #include	<list>
+#include	"Labz.h"
 #include	"RandomMachine.h"
 #include	"RxTime.h"
-
-#define		OPEN	1
-#define		CLOSED	2	
-#define		WALL	3
-
-struct			Labz
-{
-	char**		lab;
-	int			w;
-	int			h;
-
-public:
-	Labz() : lab(0) { }
-};	
-
-struct				GNode
-{
-	GNode*			tail;
-	GNode*			next;
-	int				value;
-	int				size;
-};
 
 class				HandyMaze
 {
 private:
-	static std::string		p_error;
+	static std::string			p_error;
 
 private:
-	struct			Index				//
-	{									// The Index struct is used to build a pool
-		int			value;				// of values. Each value can be picked twice
-		char		ttl;				// then will be pushed at the back of the pool.
-										// All this is an optimization whose the goal
-	public:								// is to avoid to loose time when seeking random
-		Index() : value(0), ttl(2) { }	// values which have not been picked twice already.
-	};									// I Know, I am great.
+	struct				GNode
+	{
+		GNode*			tail;
+		GNode*			next;
+		int				value;
+		int				size;
+	};
 
-public:
+private:
+	struct			Index					//
+	{										// The Index struct is used to build a pool
+		int			value;					// of values. Each value can be picked twice
+		char		ttl;					// then will be pushed at the back of the pool.
+											// All this is an optimization whose the goal
+		public:								// is to avoid to loose time when seeking random
+			Index() : value(0), ttl(2) { }	// values which have not been picked twice already.
+	};										// I Know, I am great.
+
+private:
 	struct			Shebang		//
 	{							// Shebang struct represents a square in the maze.
 		char		north;		// Each square has two unique walls, north en east.
@@ -82,7 +70,7 @@ public:
 	const int			GetHeight() const		{ return (this->p_height); }
 	const int			GetMaxShebs() const		{ return (this->p_maxshebs); }
 	const Shebang*		GetLabz() const			{ return (this->p_map); }
-	Labz*				GetFormatedLab()	{ return (this->FormatLab()); }
+	Labz*				GetFormatedLab()		{ return (this->FormatLab()); }
 
 public:
 	bool				Generate();
