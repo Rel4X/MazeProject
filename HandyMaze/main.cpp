@@ -53,8 +53,8 @@ int				main(int ac, char** av)
 			solver = new AStarLabzSolver();
 			solver->Solve(l);
 			fname = "";
-			fname = fname + "Labz_" + av[1] + "_AI.bmp";
-			if (drawer.DrawToFile(l, fname.c_str(), true) == false)
+			fname = fname + "Labz_" + av[1] + "_AI.txt";
+			if (drawer.DrawToTXT(l, fname.c_str()) == false)
 			{ std::cout << "Drawing failed (AI)" << std::endl; }
 		}
 	}

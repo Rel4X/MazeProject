@@ -87,6 +87,10 @@ bool            LabzDrawer::DrawToTXT(const Labz* l, const char* fname)
                     {
                         output << "X";
                     }
+					else if (l->lab[i][j] == IN_PATH || l->lab[i][j] == ARRIVAL)
+					{
+						output << "o";
+					}
                     else
                     {
                         output << "*";

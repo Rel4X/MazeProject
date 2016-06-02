@@ -45,6 +45,7 @@ void			AStarLabzSolver::Solve(Labz* l)
 		this->openList_.erase(ib);
 		l->lab[this->x_cur][this->y_cur] = IN_CLOSED;
 	}
+	l->lab[this->x_cur][this->y_cur] = IN_PATH; // moyen ... pour avoir la derniere case.
 	this->RecoverPath(l);
 }
 
