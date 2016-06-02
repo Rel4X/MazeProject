@@ -15,5 +15,6 @@ public:
 
 public:
 	bool	DrawToFile(const Labz*, const char*, bool);
+	bool	DrawToTXT(const Labz*, const char*);
 };
 
