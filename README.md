@@ -7,10 +7,13 @@ I have used the "EasyBMP" library by Paul Macklin for the drawing part.
 
 Available on Windows and Linux.
 
-Compile line for Linux:
-g++ -o HandyMaze -I./EasyBMP/Includes/ EasyBMP/Srcs/EasyBMP.cpp *.cpp
+Usage :
+./HandyMaze SIZE_OF_LAB [[-txt | -bmp | -both] NAME_OF_LAB]
 
-Launching line :
-./HandyMaze SIZE_OF_LAB [-ia]
+-txt asks for the output to be in ascii mod (default mod)
+-bmp asks for the output to be a BMP file ... (For beautifull output <3)
+-boths asks for both .txt and .bmp output.
 
--ia : Activate the AI solving of the maze plus the drawing of a picture of the maze with the ia's path
+If specified, the name of the output is NAME_OF_LAB_SIZE_OF_LAB.[txt | bmp]
+
+If not, the name is Labz_SIZE_OF_LAB.[txt | bmp]
