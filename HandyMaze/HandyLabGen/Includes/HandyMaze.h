@@ -16,7 +16,7 @@
 class				HandyMaze
 {
 private:
-	static std::string			p_error;
+  static std::string			p_error; // WHAT ? Maybe to remove.
 
 private:
 	struct				GNode
