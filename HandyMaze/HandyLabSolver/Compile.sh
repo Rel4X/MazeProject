@@ -1,3 +1,3 @@
 #!/bin/bash
 
-g++ -o SolverZ LabLoader.cpp LabSolver.cpp main.cpp -O3
+g++ -o SolverZ -I../HandyLabGen/EasyBMP/Includes/ -I./Includes/ ../HandyLabGen/EasyBMP/Srcs/EasyBMP.cpp Srcs/*.cpp -O3
