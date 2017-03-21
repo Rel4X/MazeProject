@@ -6,6 +6,8 @@
 
 /*
   ajouter la possibilite de generer texte et bmp.
+  ... heu ca y est je crois ... je dois verif que
+  tout yes xD ..
  */
 
 #define			OUTPUT_BOT	0

@@ -25,16 +25,16 @@ bool		LabSolver::Solve(LabLoader* labl)
     { return (false); }
 
   // Pour virer les visites ... mais ca peut etre cool de les garder.
-  for (int i = 0; i < this->p_lab->h; ++i)
+  /*for (int i = 0; i < this->p_lab->h; ++i)
     {
       for (int j = 0; j < this->p_lab->w; ++j)
 	{
 	  if (this->p_labl->Get(j, i) == VISIT)
 	    this->p_labl->Set(j, i, WAY);
 	}
-    }
+	}*/
 
-  this->p_labl->PrintConsole();
+  //this->p_labl->PrintConsole();
   return (true);
 }
 

@@ -70,7 +70,7 @@ bool            LabzDrawer::DrawToTXT(const Labz* l, const char* fname)
             {
 	      if (j > 0)
                 {
-		  if (l->lab[i][j] == WALL)
+		  if (l->lab[j][i] == WALL)
                     { output << "X"; }
 		  else
                     { output << "*"; }
@@ -82,4 +82,4 @@ bool            LabzDrawer::DrawToTXT(const Labz* l, const char* fname)
     }
   output.close();
   return (true);
-}
+OA}
