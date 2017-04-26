@@ -11,7 +11,8 @@
 #include	<list>
 #include	"Labz.h"
 #include	"RandomMachine.h"
-#include	"RxTime.h"
+
+#define	MAZ_MAX	200000
 
 class				HandyMaze
 {

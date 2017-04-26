@@ -76,10 +76,10 @@ bool            LabzDrawer::DrawToTXT(const Labz* l, const char* fname)
                     { output << "*"; }
                 }
             }
-	  if (i != (l->w - 1))
+	  if (i != (l->w - 2))
 	    output << "\n";
         }
     }
   output.close();
   return (true);
-OA}
+}
